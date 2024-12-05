@@ -39,4 +39,53 @@ a {
   html {
     color-scheme: dark;
   }
+  
+}
+
+.cell {
+  /* Text styling */
+  display: inline-block;
+  width: 100px;
+  height: 100px;
+  text-align: center;
+  font-size: 2em;
+  color: #161616;
+
+  /* Background styling */
+  background-color: #999999;
+  border-radius: 0%;
+  border: none;
+  padding: 0;
+}
+
+.cell:hover {
+
+  /* Text styling */
+  display: inline-block;
+  width: 100px;
+  height: 100px;
+  text-align: center;
+  font-size: 2em;
+
+  /* Background styling */
+  background-color: #3f3f3f;
+  border-radius: 0%;
+  border: none;
+  padding: 0;
+}
+
+.cell:active {
+  
+  /* Text styling */
+  display: inline-block;
+  width: 100px;
+  height: 100px;
+  text-align: center;
+  font-size: 2em;
+  
+  /* Background styling */
+  background-color: #919191;
+  border-radius: 0%;
+  border: none;
+  padding: 0;
 }
