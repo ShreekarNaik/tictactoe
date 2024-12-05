@@ -11,6 +11,7 @@ const Home = () => {
 	const [gameState, setGameState] = useState(
 		Array.from({ length: dimension }, () => Array(dimension).fill(""))
 	);
+	const [winner, setWinner] = useState("");
 	console.log("Initialized : ", gameState);
 	const [currentPlayer, setCurrentPlayer] = useState("X");
 
