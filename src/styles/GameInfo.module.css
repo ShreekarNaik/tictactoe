@@ -1,0 +1,9 @@
+.gameInfo {
+  margin-top: 20px;
+}
+
+.dimension,
+.turn {
+  font-size: 18px;
+  font-weight: bold;
+}
