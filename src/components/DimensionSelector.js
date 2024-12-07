@@ -3,6 +3,17 @@
 import React, { useState } from "react";
 import styles from "../styles/DimensionSelector.module.css";
 
+export function newContext(dimension) {
+	return {
+		dimension: dimension,
+		gameState: Array.from({ length: dimension }, () =>
+			Array(dimension).fill("")
+		),
+		winner: "",
+		currentPlayer: "X",
+	};
+}
+
 const DimensionSelector = ({ setContext }) => {
 	const [customDimension, setCustomDimension] = useState("");
 	const [selectedDimension, setSelectedDimension] = useState(3);
@@ -12,15 +23,7 @@ const DimensionSelector = ({ setContext }) => {
 			alert("Please enter a dimension between 3 and 10.");
 			return;
 		}
-		setContext((prevCtx) => ({
-			...prevCtx,
-			dimension: dimension,
-			gameState: Array.from({ length: dimension }, () =>
-				Array(dimension).fill("")
-			),
-			winner: "",
-			currentPlayer: "X",
-		}));
+		setContext(newContext(dimension));
 	}
 
 	function handleDimensionChange(e) {
@@ -34,8 +37,8 @@ const DimensionSelector = ({ setContext }) => {
 	function handleCustomDimensionSubmit(e) {
 		e.preventDefault();
 		const dimension = parseInt(customDimension);
-		if (isNaN(dimension) || dimension < 3 || dimension > 9) {
-			alert("Please enter a valid dimension between 3 and 9.");
+		if (isNaN(dimension) || dimension < 3 || dimension > 10) {
+			alert("Please enter a valid dimension between 3 and 10.");
 			return;
 		}
 		setDimension(dimension);
