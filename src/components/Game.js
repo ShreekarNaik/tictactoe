@@ -5,21 +5,23 @@ import Cell from "./Cell";
 import styles from "../styles/Game.module.css";
 import { checkWinner } from "../utils/gameLogic"; // utility to check if there's a winner
 
-const Game = ({
-	dimension,
-	gameState,
-	setGameState,
-	currentPlayer,
-	setCurrentPlayer,
-}) => {
+const Game = ({ context, setContext }) => {
+	console.log("Game Context : ", context);
+	let gameState = context.gameState;
+	const dimension = context.dimension;
+	let currentPlayer = context.currentPlayer;
+
 	const handleCellClick = (row, col) => {
 		const newState = [...gameState];
 		if (newState[row][col] === "") {
 			newState[row][col] = currentPlayer;
-			currentPlayer === "X"
-				? setCurrentPlayer("O")
-				: setCurrentPlayer("X");
-			setGameState(newState);
+			currentPlayer = currentPlayer === "X" ? "O" : "X";
+
+			setContext({
+				...context,
+				gameState: newState,
+				currentPlayer: currentPlayer,
+			});
 		}
 	};
 
@@ -31,12 +33,7 @@ const Game = ({
 						key={`${rowIndex}-${colIndex}`}
 						value={cell}
 						onClick={() => handleCellClick(rowIndex, colIndex)}
-						isCrossed={checkWinner(
-							gameState,
-							rowIndex,
-							colIndex,
-							currentPlayer
-						)}
+						isCrossed={checkWinner(context)}
 					/>
 				))}
 			</div>
@@ -48,11 +45,14 @@ const Game = ({
 			<button
 				className={styles.restart}
 				onClick={() =>
-					setGameState(
-						Array.from({ length: dimension }, () =>
+					setContext({
+						...context,
+						gameState: Array.from({ length: dimension }, () =>
 							Array(dimension).fill("")
-						)
-					)
+						),
+						winner: "",
+						currentPlayer: "X",
+					})
 				}
 			>
 				Restart Game
