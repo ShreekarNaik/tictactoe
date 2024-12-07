@@ -9,7 +9,7 @@ import "../styles/globals.css";
 const Home = () => {
 	const [ctx, setCtx] = useState(newContext(3));
 
-	console.log("Initialized Context : ", ctx);
+	// console.log("Initialized Context : ", ctx);
 
 	return (
 		<div className="container">
