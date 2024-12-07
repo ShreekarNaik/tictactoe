@@ -1,42 +1,22 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Game from "../components/Game";
 import GameInfo from "../components/GameInfo";
-import DimensionSelector from "../components/DimensionSelector";
+import DimensionSelector, { newContext } from "../components/DimensionSelector";
 import "../styles/globals.css";
 
 const Home = () => {
-	const [dimension, setDimension] = useState(3); // default dimension is 3x3
-	const [gameState, setGameState] = useState(
-		Array.from({ length: dimension }, () => Array(dimension).fill(""))
-	);
-	const [winner, setWinner] = useState("");
-	console.log("Initialized : ", gameState);
-	const [currentPlayer, setCurrentPlayer] = useState("X");
+	const [ctx, setCtx] = useState(newContext(3));
 
-	useEffect(() => {
-		setGameState(
-			Array.from({ length: dimension }, () => Array(dimension).fill(""))
-		);
-	}, [dimension]);
+	console.log("Initialized Context : ", ctx);
 
 	return (
 		<div className="container">
 			<h1>Tic Tac Toe</h1>
-			<DimensionSelector setDimension={setDimension} />
-			<GameInfo
-				dimension={dimension}
-				currentPlayer={currentPlayer}
-				gameState={gameState}
-			/>
-			<Game
-				dimension={dimension}
-				gameState={gameState}
-				setGameState={setGameState}
-				currentPlayer={currentPlayer}
-				setCurrentPlayer={setCurrentPlayer}
-			/>
+			<DimensionSelector setContext={setCtx} />
+			<Game context={ctx} setContext={setCtx} />
+			<GameInfo context={ctx} />
 		</div>
 	);
 };
